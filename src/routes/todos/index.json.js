@@ -1,18 +1,28 @@
 import { api } from './_api';
+import { getTodos } from "../../lib/actions"
 
-// GET /todos.json
-export const get = async (request) => {
-	// request.locals.userid comes from src/hooks.js
-	const response = await api(request, `todos/${request.locals.userid}`);
+// // GET /todos.json
+// export const get = async (request) => {
+// 	// request.locals.userid comes from src/hooks.js
+// 	const response = await api(request, `todos/${request.locals.userid}`);
 
-	if (response.status === 404) {
-		// user hasn't created a todo list.
-		// start with an empty array
-		return { body: [] };
+// 	if (response.status === 404) {
+// 		// user hasn't created a todo list.
+// 		// start with an empty array
+// 		return { body: [] };
+// 	}
+
+// 	return response;
+// };
+
+export const getTodos = async () => {
+	try {
+	  const { conn, Todo } = await connect()
+	  return await Todo.find({})
+	} catch (error) {
+	  return { error: "Error in getTodos function" }
 	}
-
-	return response;
-};
+  }
 
 // POST /todos.json
 export const post = async (request) => {

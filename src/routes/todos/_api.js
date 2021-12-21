@@ -19,14 +19,14 @@ export async function api(request, resource, data) {
 		return { status: 401 };
 	}
 
-	// const res = await fetch(`${base}/${resource}`, {
-	// 	method: request.method,
-	// 	headers: {'content-type': 'application/json'},
-	// 	body: data && JSON.stringify(data)
-	// });
+	const res = await fetch(`${base}/${resource}`, {
+		method: request.method,
+		headers: {'content-type': 'application/json'},
+		body: data && JSON.stringify(data)
+	});
 
-	const { conn, Todo } = await connect()
-    return await Todo.find({})
+	// const { conn, Todo } = await connect()
+    // return await Todo.find({})
 
 	// if the request came from a <form> submission, the browser's default
 	// behaviour is to show the URL corresponding to the form's "action"
